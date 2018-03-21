@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Route, withRouter, Link, Switch } from 'react-router-dom'
 import { fetchAllPosts, fetchAllCategories } from './actions'
-import logo from './logo.svg';
+import logo from './HOB_logo.png';
 import './App.css';
 import Post from './components/Post'
 import PostList from './components/PostList'

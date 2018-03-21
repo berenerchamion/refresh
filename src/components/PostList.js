@@ -7,7 +7,7 @@ import * as actions from '../actions'
 class PostList extends Component{
 
   state = {
-    selectedCategory: 'all'
+    selectedCategory: ''
   }
 
   updateFilter = (e) => {

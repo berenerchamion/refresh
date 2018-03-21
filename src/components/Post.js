@@ -13,19 +13,54 @@ class Post extends Component{
     postId: null
   }
 
-    render(){
-      return(
-        <div className="post-container">
-        Hello there I am here!
-        </div>
-      )
+  submitPostVote = (id, voteType) => {
+    const postData = {
+      id: id,
+      voteType: voteType
     }
+    this.props.voteForPost(postData)
+    this.props.fetchAllPosts()
+  }
 
+  submitCommentVote = (postId, commentId, voteType) => {
+    const postData = {
+      postId: postId,
+      commentId: commentId,
+      voteType: voteType
+    }
+    this.props.voteForComment(postData)
+    this.props.fetchPostComments()
+  }
+
+  render(){
+    const { posts } = this.props
+    const { postId } = this.props
+
+    var post = posts.filter((post) => (post.id === postId))
+
+    return(
+      <div className="post-container">
+        {post.map((p) => (
+          <div className="post-details">
+            <div className="post-title">{p.title} - by - {p.author} - on {p.timestamp}</div>
+            <div className="post-body">{ p.body }</div>
+            <div className="post-votes">
+              <div className="post-body">{ p.body }</div>
+                <div className>Votes: { p.voteScore }
+                  <button className="vote-button" onClick={(event => this.submitPostVote(`${p.id}`, 'upVote'))}>+</button>
+                  <button onClick={(event => this.submitPostVote(`${p.id}`, 'downVote'))}>-</button>
+                </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
 }
 
 function mapStateToProps(state, { match }) {
   return {
-    post: state.posts.filter((post) => (post.id === match.params.id)),
+    posts: state.posts,
     postId: match.params.id,
   }
 }
