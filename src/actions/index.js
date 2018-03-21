@@ -1,5 +1,6 @@
 import { fetchPosts,
         fetchPost,
+        fetchCategories,
       } from '../utils/ReadableAPI'
 
 export const FETCH_POSTS = 'FETCH_POSTS'
@@ -20,4 +21,16 @@ export const fetchOnePost = (id) => {
       dispatch({type: FETCH_POST, post })
     })
   }
+}
+
+//Categories related APIs
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES'
+
+export const fetchAllCategories = () => {
+    return (dispatch) => {
+      fetchCategories().then(categories => {
+        dispatch({ type: FETCH_CATEGORIES, categories })
+      })
+  }
+
 }

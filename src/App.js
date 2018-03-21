@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Route, withRouter, Link, Switch } from 'react-router-dom'
-import { fetchAllPosts } from './actions'
+import { fetchAllPosts, fetchAllCategories } from './actions'
 import logo from './logo.svg';
 import './App.css';
 import Post from './components/Post'
@@ -11,6 +11,7 @@ class App extends Component{
 
   componentDidMount(){
     this.props.fetchAllPosts()
+    this.props.fetchAllCategories()
   }
 
   render() {
@@ -21,7 +22,7 @@ class App extends Component{
         <div className="container">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
+            <h1 className="App-title">Welcome to Readable - a Nanodegree Project!</h1>
           </header>
           <div className="content">
             <Switch>
@@ -41,4 +42,4 @@ function mapStateToProps({ posts }) {
   }
 }
 
-export default withRouter (connect(mapStateToProps, { fetchAllPosts })(App))
+export default withRouter (connect(mapStateToProps, { fetchAllPosts, fetchAllCategories })(App))
