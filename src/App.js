@@ -1,21 +1,44 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { Route, withRouter, Link, Switch } from 'react-router-dom'
+import { fetchAllPosts } from './actions'
 import logo from './logo.svg';
 import './App.css';
+import Post from './components/Post'
+import PostList from './components/PostList'
 
-class App extends Component {
+class App extends Component{
+
+  componentDidMount(){
+    this.props.fetchAllPosts()
+  }
+
   render() {
+    const { posts } = this.props
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="container">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1 className="App-title">Welcome to React</h1>
+          </header>
+          <div className="content">
+            <Switch>
+              <Route exact path="/" component={PostList} />
+              <Route exact path="/:category/:id" component={Post} />
+            </Switch>
+          </div>
+        </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+function mapStateToProps({ posts }) {
+  return {
+    posts: posts
+  }
+}
+
+export default withRouter (connect(mapStateToProps, { fetchAllPosts })(App))
