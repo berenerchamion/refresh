@@ -20,10 +20,12 @@ class App extends Component{
     return (
       <div className="App">
         <div className="container">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to Readable - a Nanodegree Project!</h1>
-          </header>
+          <Link className="link-home" to={`/`}>
+            <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <h1 className="App-title">Welcome to Readable - a Nanodegree Project!</h1>
+            </header>
+          </Link>
           <div className="content">
             <Switch>
               <Route exact path="/" component={PostList} />
