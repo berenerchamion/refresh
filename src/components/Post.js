@@ -13,6 +13,11 @@ class Post extends Component{
     postId: null
   }
 
+  componentWillMount(){
+    console.log("Mounting: "+ this.props.postId)
+    this.props.fetchPostComments(this.props.postId)
+  }
+
   submitPostVote = (id, voteType) => {
     const postData = {
       id: id,
@@ -35,6 +40,7 @@ class Post extends Component{
   render(){
     const { posts } = this.props
     const { postId } = this.props
+    let comments = this.props.comments[postId]
 
     var post = posts.filter((post) => (post.id === postId))
 
@@ -52,6 +58,20 @@ class Post extends Component{
             </div>
           </div>
         ))}
+        {comments &&
+          <div className="post-comments">
+            <h2 className="section-title">Comments: </h2>
+            <ul className="comment-list">
+              {comments.map((comment) => (
+                <li key={comment.id} className="comment">{comment.author} Votes: {comment.voteScore}
+                  <button className="vote-button" onClick={(event => this.submitCommentVote(`${postId}`, `${comment.id}`, 'upVote'))}>+</button>
+                  <button onClick={(event => this.submitCommentVote(`${postId}`, `${comment.id}`, 'downVote'))}>-</button>
+                  <br/>
+                {comment.body} </li>
+              ))}
+            </ul>
+          </div>
+        }
       </div>
     )
   }
@@ -61,6 +81,7 @@ function mapStateToProps(state, { match }) {
   return {
     posts: state.posts,
     postId: match.params.id,
+    comments: state.comments
   }
 }
 
