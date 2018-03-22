@@ -56,6 +56,7 @@ class Post extends Component{
                   <button className="vote-button" onClick={(event => this.submitPostVote(`${p.id}`, 'downVote'))}>-</button>
                 </div>
             </div>
+            <div className="post-delete"><Link className="delete-post" to={`/delete/${p.id}`}>Delete Me!</Link></div>
           </div>
         ))}
         {comments &&

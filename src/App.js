@@ -7,6 +7,7 @@ import './App.css';
 import Post from './components/Post'
 import PostList from './components/PostList'
 import AddPost from './components/AddPost'
+import DeletePost from './components/DeletePost'
 
 class App extends Component{
 
@@ -21,17 +22,18 @@ class App extends Component{
     return (
       <div className="App">
         <div className="container">
-          <Link className="link-home" to={`/`}>
             <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-              <h1 className="App-title">Welcome to Readable - a Nanodegree Project!</h1>
+              <Link className="link-home" to={`/`}>
+                <img src={logo} className="App-logo" alt="logo" />
+                <h1 className="App-title">Welcome to Readable - a Nanodegree Project!</h1>
+              </Link>
               <div className="add-post"><Link className="add-post" to={`/add`}>Got soomething to say???</Link></div>
             </header>
-          </Link>
           <div className="content">
             <Switch>
               <Route exact path="/" component={PostList} />
               <Route exact path="/add" component={AddPost} />
+              <Route exact path="/delete/:id" component={DeletePost} />
               <Route exact path="/:category/:id" component={Post} />
             </Switch>
           </div>

@@ -3,6 +3,7 @@ import { FETCH_POSTS,
           VOTE_FOR_POST,
           ADD_POST,
           EDIT_POST,
+          DELETE_POST,
         } from '../actions'
 
 function posts(state=[], action) {
@@ -19,6 +20,13 @@ function posts(state=[], action) {
       return state.map(post => {
         if (post.id === postData.id){
           post = postData
+        }
+        return post
+      })
+    case DELETE_POST:
+      return state.map(post => {
+        if (post.id === postData.id){
+          post.deleted = true
         }
         return post
       })

@@ -4,6 +4,7 @@ import { fetchPosts,
         votePost,
         editPost,
         addPost,
+        deletePost,
         fetchComments,
         addComment,
         editComment,
@@ -16,6 +17,7 @@ export const FETCH_POST = 'FETCH_POST'
 export const VOTE_FOR_POST = 'VOTE_FOR_POST'
 export const ADD_POST = 'ADD_POST'
 export const EDIT_POST = 'EDIT_POST'
+export const DELETE_POST = 'DELETE_POST'
 
 export const fetchAllPosts = () => {
   return (dispatch) => {
@@ -45,6 +47,13 @@ export const voteForPost = (postData) => {
     return (dispatch) => {
       addPost(postData).then(() => cb())
       dispatch({ type: ADD_POST, postData })
+    }
+  }
+
+  export const deleteThisPost = (postData, cb) => {
+    return (dispatch) => {
+      deletePost(postData).then(() => cb())
+      dispatch({ type: DELETE_POST, postData })
     }
   }
 

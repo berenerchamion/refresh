@@ -37,6 +37,14 @@ if (!token)
     })
   }
 
+  export const deletePost = (postData) => {
+    console.log("I'm in the delete: " + postData.id)
+    return fetch (`${api}/posts/${postData.id}`, {
+      method: 'DELETE',
+      headers: headers
+    })
+  }
+
   export const votePost = (postData) => {
     return fetch (`${api}/posts/${postData.id}`, {
       method: 'POST',
