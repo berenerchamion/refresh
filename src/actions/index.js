@@ -4,6 +4,11 @@ import { fetchPosts,
         votePost,
         editPost,
         addPost,
+        fetchComments,
+        addComment,
+        editComment,
+        deleteComment,
+        voteComment,
       } from '../utils/ReadableAPI'
 
 export const FETCH_POSTS = 'FETCH_POSTS'
@@ -49,6 +54,36 @@ export const voteForPost = (postData) => {
       dispatch({type: EDIT_POST, postData})
     }
   }
+
+  //Comments related APIs
+  export const ADD_COMMENT = 'ADD_COMMENT'
+  export const EDIT_COMMENT = 'EDIT_COMMENT'
+  export const DELETE_COMMENT = 'DELETE_COMMENT'
+  export const FETCH_COMMENTS = 'FETCH_COMMENTS'
+  export const VOTE_FOR_COMMENT = 'VOTE_FOR_COMENT'
+
+  export const fetchPostComments = (postId) => {
+    return (dispatch) => {
+      fetchComments(postId).then(comments => {
+        dispatch({ type: FETCH_COMMENTS, postId, comments})
+      })
+    }
+  }
+
+  export const addNewComment = (commentData, cb) => {
+    return (dispatch) => {
+      addComment(commentData).then(() => cb())
+      dispatch({type: ADD_COMMENT, commentData})
+    }
+  }
+
+  export const voteForComment = (postData) => {
+      return (dispatch) => {
+        voteComment(postData)
+        dispatch({type: VOTE_FOR_COMMENT, postData })
+      }
+  }
+
 
 //Categories related APIs
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES'
