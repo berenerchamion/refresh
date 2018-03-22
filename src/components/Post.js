@@ -41,14 +41,13 @@ class Post extends Component{
     return(
       <div className="post-container">
         {post.map((p) => (
-          <div className="post-details">
+          <div key={p.id} className="post-details">
             <div className="post-title">{p.title} - by - {p.author} - on {p.timestamp}</div>
             <div className="post-body">{ p.body }</div>
             <div className="post-votes">
-              <div className="post-body">{ p.body }</div>
-                <div className>Votes: { p.voteScore }
+                <div className="vote-buttons">Votes: { p.voteScore }
                   <button className="vote-button" onClick={(event => this.submitPostVote(`${p.id}`, 'upVote'))}>+</button>
-                  <button onClick={(event => this.submitPostVote(`${p.id}`, 'downVote'))}>-</button>
+                  <button className="vote-button" onClick={(event => this.submitPostVote(`${p.id}`, 'downVote'))}>-</button>
                 </div>
             </div>
           </div>

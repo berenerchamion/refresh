@@ -67,7 +67,9 @@ class PostList extends Component{
                 { post.title }</Link> by { post.author }
                 <br/>
               Category: { post.category }<br/>
-            Popularity: { post.voteScore }</li>
+            Popularity: { post.voteScore }
+            <button className="vote-button" onClick={(event => this.submitPostVote(`${post.id}`, 'upVote'))}>+</button>
+            <button onClick={(event => this.submitPostVote(`${post.id}`, 'downVote'))}>-</button></li>
           ))}
         </div>
       </div>
@@ -83,4 +85,4 @@ function mapStateToProps({ posts, categories }) {
   }
 }
 
-export default withRouter (connect(mapStateToProps)(PostList))
+export default withRouter (connect(mapStateToProps, actions)(PostList))
