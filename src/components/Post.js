@@ -15,6 +15,7 @@ class Post extends Component{
 
   componentWillMount(){
     this.props.fetchPostComments(this.props.postId)
+    Modal.setAppElement('body');
   }
 
   submitPostVote = (id, voteType) => {
@@ -36,10 +37,36 @@ class Post extends Component{
     this.props.fetchPostComments()
   }
 
+  submitComment = (e) => {
+    e.preventDefault()
+    console.log("Comment: " + this.input.value)
+  }
+
+  openModal = () => {
+    this.setState(() => ({
+      modalIsOpen: true
+    }))
+  }
+
+  afterOpenModal(){
+
+  }
+
+  closeModal = () => {
+    this.setState(() => ({
+      modalIsOpen: false,
+      postId: null
+    }))
+  }
+
   render(){
+    //State and props values
     const { posts } = this.props
     const { postId } = this.props
-    let comments = this.props.comments[postId]\
+    const { modalIsOpen } = this.state
+
+    //Mapping in values for collections
+    let comments = this.props.comments[postId]
     let post = posts.filter((post) => (post.id === postId))
 
     return(
@@ -71,6 +98,40 @@ class Post extends Component{
             </ul>
           </div>
         }
+        <div className="comment-modal">
+          <Modal
+            className="modal"
+            overlayClassName="overlay"
+            isOpen={modalIsOpen}
+            onRequestClose={this.closeModal}
+            contentLabel="Modal"
+            >
+            <div className="comment-modal">
+              <h3 className="comment-modal-header">Add Your Comment:</h3>
+              <input
+                className="comment-input"
+                type="text"
+                placeholder="Enter a comment..."
+                ref={(input) => this.input = input}
+                >
+              </input>
+              <button
+                className="comment-button"
+                onClick={this.submitComment}
+                >
+              </button>
+              <button
+                className="comment-button"
+                onClick={this.closeCommentModal}
+                >
+              </button>
+          </div>
+          </Modal>
+          <div className="add-comment">
+            <button className="add-comment" onClick={this.openModal}>Add Comment</button>
+          </div>
+        </div>
+
       </div>
     )
   }
