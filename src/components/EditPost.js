@@ -13,8 +13,10 @@ class EditPost extends Component{
 
   editPost = (e) => {
     e.preventDefault()
-    if (e.target.body.value ==="" || e.target.title.value =="")
+    if (e.target.body.value === "" || e.target.title.value === ""){
+      //Replace with a modal box
       alert("Hey, you need a title and body")
+    }
     else {
       const postData = {
         id: this.props.postId,

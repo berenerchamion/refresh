@@ -39,9 +39,8 @@ class Post extends Component{
   render(){
     const { posts } = this.props
     const { postId } = this.props
-    let comments = this.props.comments[postId]
-
-    var post = posts.filter((post) => (post.id === postId))
+    let comments = this.props.comments[postId]\
+    let post = posts.filter((post) => (post.id === postId))
 
     return(
       <div className="post-container">

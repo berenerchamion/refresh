@@ -36,7 +36,7 @@ class PostList extends Component{
     let displayedPosts
     let catLabel
 
-    if (selectedCategory != ''){
+    if (selectedCategory !== ''){
       catLabel = selectedCategory
       displayedPosts = posts.filter((post) => (post.category === selectedCategory))
     }
