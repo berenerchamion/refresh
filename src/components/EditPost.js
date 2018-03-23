@@ -17,10 +17,11 @@ class EditPost extends Component{
       alert("Hey, you need a title and body")
     else {
       const postData = {
-        id: this.state.postId,
+        id: this.props.postId,
         title: e.target.title.value,
-        body: e.target.body.value
+        body: e.target.body.value,
       }
+      this.props.fetchAllPosts()
       this.props.submitEdit(postData, () => this.props.history.push('/'))
     }
   }
