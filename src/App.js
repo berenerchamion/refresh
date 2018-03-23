@@ -8,6 +8,7 @@ import Post from './components/Post'
 import PostList from './components/PostList'
 import AddPost from './components/AddPost'
 import DeletePost from './components/DeletePost'
+import EditPost from './components/EditPost'
 
 class App extends Component{
 
@@ -35,6 +36,7 @@ class App extends Component{
               <Route exact path="/add" component={AddPost} />
               <Route exact path="/delete/:id" component={DeletePost} />
               <Route exact path="/:category/:id" component={Post} />
+              <Route exact path="/:category/:id/edit" component={EditPost} />
             </Switch>
           </div>
         </div>

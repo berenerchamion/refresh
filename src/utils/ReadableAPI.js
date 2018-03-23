@@ -38,7 +38,6 @@ if (!token)
   }
 
   export const deletePost = (postData) => {
-    console.log("I'm in the delete: " + postData.id)
     return fetch (`${api}/posts/${postData.id}`, {
       method: 'DELETE',
       headers: headers
@@ -80,7 +79,6 @@ if (!token)
   }
 
   export const voteComment = (postData) => {
-    console.log(`${api}/comments/${postData.commentId}`)
     return fetch (`${api}/comments/${postData.commentId}`, {
       method: 'POST',
       headers: headers,

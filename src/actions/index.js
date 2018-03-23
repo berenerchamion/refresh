@@ -72,7 +72,6 @@ export const voteForPost = (postData) => {
   export const VOTE_FOR_COMMENT = 'VOTE_FOR_COMENT'
 
   export const fetchPostComments = (postId) => {
-    console.log("Fetching comments for: " + postId)
     return (dispatch) => {
       fetchComments(postId).then(comments => {
         dispatch({ type: FETCH_COMMENTS, postId, comments})

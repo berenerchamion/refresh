@@ -8,7 +8,6 @@ import {
 
 function comments(state={}, action) {
   const { comment, postData, comments } = action
-  console.log(action)
   switch(action.type) {
     case FETCH_COMMENTS:
       return{
@@ -22,9 +21,6 @@ function comments(state={}, action) {
     case DELETE_COMMENT:
       return state
     case VOTE_FOR_COMMENT:
-      console.log("commentId: " + postData.commentId
-      + " postId: " + postData.postId
-      + " voteTpye: " + postData.voteType)
       return{
         ...state,
         [postData.postId ]: state[postData.postId].map(comment => {

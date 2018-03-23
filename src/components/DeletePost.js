@@ -8,7 +8,6 @@ import { uuidv4} from '../utils/helpers'
 class DeletePost extends Component{
 
   deletePost = (postId) => {
-    console.log("Deleting: " + postId)
     const postData = {
       id: postId
     }
@@ -17,7 +16,6 @@ class DeletePost extends Component{
 
   render(){
     const { postId } = this.props
-    console.log("render(): " + postId)
     return(
       <div className="container">
       <div className="confirm">Are you sure???</div>
@@ -28,7 +26,6 @@ class DeletePost extends Component{
 }
 
 function mapStateToProps(state, { match }){
-  console.log("mapStateToProps: " + match.params.id)
   return {
     postId: match.params.id
   }

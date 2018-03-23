@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Route, withRouter, Link, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import * as actions from '../actions'
+import EditPost from './EditPost'
 
 class PostList extends Component{
 
@@ -43,9 +44,6 @@ class PostList extends Component{
       catLabel = 'all'
       displayedPosts = posts
     }
-
-    console.log(selectedCategory)
-
     return (
       <div className="post-list-container">
         <div className="categories">
@@ -64,7 +62,7 @@ class PostList extends Component{
           {displayedPosts.map((post) => (
             <li className="post-details" key={post.id} >
               <Link to={`/${post.category}/${post.id}`}>
-                { post.title }</Link> by { post.author }
+                { post.title }</Link> by { post.author } <Link to={`/${post.category}/${post.id}/edit`}>Edit Post</Link>
                 <br/>
               Category: { post.category }<br/>
             Popularity: { post.voteScore }
@@ -73,7 +71,6 @@ class PostList extends Component{
           ))}
         </div>
       </div>
-
     )
   }
 }

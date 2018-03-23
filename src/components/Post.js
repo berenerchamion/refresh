@@ -14,7 +14,6 @@ class Post extends Component{
   }
 
   componentWillMount(){
-    console.log("Mounting: "+ this.props.postId)
     this.props.fetchPostComments(this.props.postId)
   }
 
