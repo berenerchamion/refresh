@@ -5,6 +5,8 @@ import * as actions from '../actions'
 import { Link, Redirect } from 'react-router-dom'
 import Modal from 'react-modal'
 import ReactDOM from 'react-dom'
+import FaMehOIcon from 'react-icons/lib/fa/meh-o'
+import FaSmileOIcon from 'react-icons/lib/fa/smile-o'
 
 class Post extends Component{
 
@@ -98,6 +100,9 @@ class Post extends Component{
             </ul>
           </div>
         }
+        <div className="add-comment">
+          <button className="add-comment" onClick={this.openModal}>Add Comment</button>
+        </div>
         <div className="comment-modal">
           <Modal
             className="modal"
@@ -108,28 +113,31 @@ class Post extends Component{
             >
             <div className="comment-modal">
               <h3 className="comment-modal-header">Add Your Comment:</h3>
-              <input
-                className="comment-input"
-                type="text"
-                placeholder="Enter a comment..."
-                ref={(input) => this.input = input}
-                >
-              </input>
-              <button
-                className="comment-button"
-                onClick={this.submitComment}
-                >
-              </button>
-              <button
-                className="comment-button"
-                onClick={this.closeCommentModal}
-                >
-              </button>
+              <div className="comment-form">
+                <input
+                  className="comment-input"
+                  type="text"
+                  placeholder="Enter a comment..."
+                  ref={(input) => this.input = input}
+                  >
+                </input>
+              </div>
+              <div className="comment-form-buttons">
+                <button
+                  className="comment-button"
+                  onClick={this.submitComment}
+                  >
+                  <FaMehOIcon size={30}/>
+                </button>
+                <button
+                  className="comment-button"
+                  onClick={this.closeCommentModal}
+                  >
+                  <FaSmileOIcon size={30}/>
+                </button>
+              </div>
           </div>
           </Modal>
-          <div className="add-comment">
-            <button className="add-comment" onClick={this.openModal}>Add Comment</button>
-          </div>
         </div>
 
       </div>
