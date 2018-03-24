@@ -20,9 +20,9 @@ class Post extends Component{
     Modal.setAppElement('body');
   }
 
-  submitPostVote = (id, voteType) => {
+  submitPostVote = (postId, voteType) => {
     const postData = {
-      id: id,
+      id: postId,
       voteType: voteType
     }
     this.props.voteForPost(postData)
@@ -36,7 +36,7 @@ class Post extends Component{
       voteType: voteType
     }
     this.props.voteForComment(postData)
-    this.props.fetchPostComments()
+    this.props.fetchPostComments(this.props.postId)
   }
 
   submitComment = (e) => {
@@ -69,16 +69,13 @@ class Post extends Component{
     console.log(commentData.parentId)
     let url = "/" + this.props.category + "/" + this.props.postId
     this.props.deleteThisComment(commentData, () => this.props.history.push(url))
+    this.props.fetchPostComments(this.props.postId)
   }
 
   openModal = () => {
     this.setState(() => ({
       modalIsOpen: true
     }))
-  }
-
-  afterOpenModal(){
-
   }
 
   closeModal = () => {
@@ -93,6 +90,8 @@ class Post extends Component{
     const { posts } = this.props
     const { postId } = this.props
     const { modalIsOpen } = this.state
+
+    console.log(postId)
 
     //Mapping in values for collections
     let comments = this.props.comments[postId]
