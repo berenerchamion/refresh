@@ -7,7 +7,7 @@ import {
         } from '../actions'
 
 function comments(state={}, action) {
-  const { comment, postData, comments } = action
+  const { comment, commentData, postData, comments } = action
   switch(action.type) {
     case FETCH_COMMENTS:
       return{
@@ -15,7 +15,10 @@ function comments(state={}, action) {
         [action.postId]: comments
       }
     case ADD_COMMENT:
-      return state
+      return{
+        ...state,
+        [commentData.parentId]: state[commentData.parentId].concat([commentData])
+      }
     case EDIT_COMMENT:
       return state
     case DELETE_COMMENT:

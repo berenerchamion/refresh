@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import * as actions from '../actions'
-import { Link, Redirect } from 'react-router-dom'
-import { uuidv4} from '../utils/helpers'
+import { Redirect } from 'react-router-dom'
 
 class EditPost extends Component{
 

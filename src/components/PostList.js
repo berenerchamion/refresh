@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Route, withRouter, Link, Switch } from 'react-router-dom'
+import { withRouter, Link} from 'react-router-dom'
 import PropTypes from 'prop-types';
 import * as actions from '../actions'
 import EditPost from './EditPost'

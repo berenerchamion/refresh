@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import * as actions from '../actions'
-import { Link, Redirect } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import Modal from 'react-modal'
-import ReactDOM from 'react-dom'
+import { uuidv4} from '../utils/helpers'
 import FaMehOIcon from 'react-icons/lib/fa/meh-o'
 import FaSmileOIcon from 'react-icons/lib/fa/smile-o'
 
@@ -41,7 +41,21 @@ class Post extends Component{
 
   submitComment = (e) => {
     e.preventDefault()
-    console.log("Comment: " + this.input.value)
+    if (!this.input.value){
+      return
+    }
+
+    const commentData = {
+      id: uuidv4(),
+      parentId: this.props.postId,
+      timestamp: Date.now(),
+      body: this.input.value,
+      author: "beren erchamion",
+      voteScore: 0,
+    }
+    let url = "/" + this.props.category + "/" + this.props.postId
+    this.props.addNewComment(commentData, () => this.props.history.push(url))
+    this.closeModal()
   }
 
   openModal = () => {
@@ -88,7 +102,7 @@ class Post extends Component{
         ))}
         {comments &&
           <div className="post-comments">
-            <h2 className="section-title">Comments: </h2>
+            <h2 className="section-title">Comments:</h2>
             <ul className="comment-list">
               {comments.map((comment) => (
                 <li key={comment.id} className="comment">{comment.author} Votes: {comment.voteScore}
@@ -149,6 +163,7 @@ function mapStateToProps(state, { match }) {
   return {
     posts: state.posts,
     postId: match.params.id,
+    category: match.params.id,
     comments: state.comments
   }
 }
