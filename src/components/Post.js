@@ -59,6 +59,18 @@ class Post extends Component{
     this.closeModal()
   }
 
+  submitDeleteComment = (id, parentId) => {
+
+    const commentData = {
+      id: id,
+      parentId: parentId,
+    }
+    console.log(commentData.id)
+    console.log(commentData.parentId)
+    let url = "/" + this.props.category + "/" + this.props.postId
+    this.props.deleteThisComment(commentData, () => this.props.history.push(url))
+  }
+
   openModal = () => {
     this.setState(() => ({
       modalIsOpen: true
@@ -107,8 +119,9 @@ class Post extends Component{
             <ul className="comment-list">
               {comments.map((comment) => (
                 <li key={comment.id} className="comment">{comment.author} Votes: {comment.voteScore}
-                  <button className="vote-button" onClick={(event => this.submitCommentVote(`${postId}`, `${comment.id}`, 'upVote'))}>+</button>
-                  <button onClick={(event => this.submitCommentVote(`${postId}`, `${comment.id}`, 'downVote'))}>-</button>
+                  <button className="vote-up-button" onClick={(event => this.submitCommentVote(`${postId}`, `${comment.id}`, 'upVote'))}>+</button>
+                  <button className="vote-down-button" onClick={(event => this.submitCommentVote(`${postId}`, `${comment.id}`, 'downVote'))}>-</button>
+                  <button className="delete-comment" onClick={(event => this.submitDeleteComment(`${comment.id}`, `${postId}`))}>X</button>
                   <br/>
                 {comment.body} </li>
               ))}

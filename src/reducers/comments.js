@@ -22,7 +22,16 @@ function comments(state={}, action) {
     case EDIT_COMMENT:
       return state
     case DELETE_COMMENT:
-      return state
+      return {
+        ...state,
+        [commentData.parentID]: state[commentData.parentId].map(comment => {
+          if (comment.id === commentData.id){
+            comment.deleted = true
+            console.log("I deleted it...")
+          }
+          return comment
+        })
+      }
     case VOTE_FOR_COMMENT:
       return{
         ...state,
@@ -35,7 +44,7 @@ function comments(state={}, action) {
               comment.voteScore -= 1
             }
           }
-          return comment
+          return state
         })
       }
     default:

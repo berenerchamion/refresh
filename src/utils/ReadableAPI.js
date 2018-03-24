@@ -78,6 +78,13 @@ if (!token)
     })
   }
 
+  export const deleteComment = (id) => {
+    return fetch (`${api}/comments/${id}`, {
+      method: 'DELETE',
+      headers: headers
+    })
+  }
+
   export const voteComment = (postData) => {
     return fetch (`${api}/comments/${postData.commentId}`, {
       method: 'POST',
@@ -85,7 +92,3 @@ if (!token)
       body: JSON.stringify({option: postData.voteType})
     })
   }
-
-export const deleteComment = () => {
-
-}
