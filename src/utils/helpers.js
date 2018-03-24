@@ -1,5 +1,6 @@
 export function formatTimestamp(t){
-  let d = new Date(t)
+  //Ok so the turnary operator is a trick to converst the string into a number
+  let d = new Date(+t)
   return d.toLocaleString()
 }
 

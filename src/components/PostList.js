@@ -4,6 +4,7 @@ import { withRouter, Link} from 'react-router-dom'
 import PropTypes from 'prop-types';
 import * as actions from '../actions'
 import EditPost from './EditPost'
+import { formatTimestamp } from '../utils/helpers'
 
 class PostList extends Component{
 
@@ -38,7 +39,7 @@ class PostList extends Component{
 
     if (selectedCategory !== ''){
       catLabel = selectedCategory
-      displayedPosts = posts.filter((post) => (post.category === selectedCategory))
+      displayedPosts = posts.filter((post) => (post.category === selectedCategory && post.deleted != true))
     }
     else{
       catLabel = 'all'
@@ -62,12 +63,13 @@ class PostList extends Component{
           {displayedPosts.map((post) => (
             <li className="post-details" key={post.id} >
               <Link to={`/${post.category}/${post.id}`}>
-                { post.title }</Link> by { post.author } <Link to={`/${post.category}/${post.id}/edit`}>Edit Post</Link>
+                { post.title }</Link> by { post.author } at {formatTimestamp(`${post.timestamp}`)} <Link to={`/${post.category}/${post.id}/edit`}>Edit Post</Link>
                 <br/>
               Category: { post.category }<br/>
-            Popularity: { post.voteScore }
+              Popularity: { post.voteScore }
             <button className="vote-button" onClick={(event => this.submitPostVote(`${post.id}`, 'upVote'))}>+</button>
-            <button onClick={(event => this.submitPostVote(`${post.id}`, 'downVote'))}>-</button></li>
+            <button onClick={(event => this.submitPostVote(`${post.id}`, 'downVote'))}>-</button><br/>
+            Comment Count: gotta add this...<br/></li>
           ))}
         </div>
       </div>

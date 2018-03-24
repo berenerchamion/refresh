@@ -7,6 +7,7 @@ import Modal from 'react-modal'
 import { uuidv4} from '../utils/helpers'
 import FaMehOIcon from 'react-icons/lib/fa/meh-o'
 import FaSmileOIcon from 'react-icons/lib/fa/smile-o'
+import { formatTimestamp } from '../utils/helpers'
 
 class Post extends Component{
 
@@ -101,7 +102,7 @@ class Post extends Component{
       <div className="post-container">
         {post.map((p) => (
           <div key={p.id} className="post-details">
-            <div className="post-title">{p.title} - by - {p.author} - on {p.timestamp}</div>
+            <div className="post-title">{p.title} - by - {p.author} - on {formatTimestamp(`${p.timestamp}`)}</div>
             <div className="post-body">{ p.body }</div>
             <div className="post-votes">
                 <div className="vote-buttons">Votes: { p.voteScore }
