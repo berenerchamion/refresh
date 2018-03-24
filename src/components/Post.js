@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import * as actions from '../actions'
-import { Link} from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Modal from 'react-modal'
 import { uuidv4} from '../utils/helpers'
 import FaMehOIcon from 'react-icons/lib/fa/meh-o'
@@ -41,7 +41,8 @@ class Post extends Component{
 
   submitComment = (e) => {
     e.preventDefault()
-    if (!this.input.value){
+    if (!this.input.value || !this.author.value){
+      alert("Author and a comment are required")
       return
     }
 
@@ -50,7 +51,7 @@ class Post extends Component{
       parentId: this.props.postId,
       timestamp: Date.now(),
       body: this.input.value,
-      author: "beren erchamion",
+      author: this.author.value,
       voteScore: 0,
     }
     let url = "/" + this.props.category + "/" + this.props.postId
@@ -131,6 +132,13 @@ class Post extends Component{
                 <input
                   className="comment-input"
                   type="text"
+                  placeholder="Enter your name..."
+                  ref={(author) => this.author = author}
+                  >
+                </input>
+                <input
+                  className="comment-input"
+                  type="text"
                   placeholder="Enter a comment..."
                   ref={(input) => this.input = input}
                   >
@@ -141,13 +149,13 @@ class Post extends Component{
                   className="comment-button"
                   onClick={this.submitComment}
                   >
-                  <FaMehOIcon size={30}/>
+                  <FaSmileOIcon size={40}/>
                 </button>
                 <button
                   className="comment-button"
-                  onClick={this.closeCommentModal}
+                  onClick={this.closeModal}
                   >
-                  <FaSmileOIcon size={30}/>
+                  <FaMehOIcon size={40}/>
                 </button>
               </div>
           </div>
