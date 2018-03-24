@@ -66,8 +66,6 @@ class Post extends Component{
       id: id,
       parentId: parentId,
     }
-    console.log(commentData.id)
-    console.log(commentData.parentId)
     let url = "/" + this.props.category + "/" + this.props.postId
     this.props.deleteThisComment(commentData, () => this.props.history.push(url))
     this.props.fetchPostComments(this.props.postId)
@@ -91,8 +89,6 @@ class Post extends Component{
     const { posts } = this.props
     const { postId } = this.props
     const { modalIsOpen } = this.state
-
-    console.log(postId)
 
     //Mapping in values for collections
     let comments = this.props.comments[postId]

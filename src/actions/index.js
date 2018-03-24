@@ -87,7 +87,6 @@ export const voteForPost = (postData) => {
   }
 
   export const deleteThisComment = (commentData, cb) => {
-    console.log("in the action: " + commentData.id)
     return (dispatch) => {
       deleteComment(commentData.id).then(() => cb())
       dispatch({ type: DELETE_COMMENT, commentData })

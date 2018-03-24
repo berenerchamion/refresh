@@ -27,7 +27,6 @@ function comments(state={}, action) {
         [commentData.parentID]: state[commentData.parentId].map(comment => {
           if (comment.id === commentData.id){
             comment.deleted = true
-            console.log("I deleted it...")
           }
           return comment
         })
