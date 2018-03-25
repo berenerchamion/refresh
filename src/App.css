@@ -16,6 +16,15 @@ a{
   text-decoration: none;
 }
 
+.categories{
+  float: left;
+  padding: 5px;
+}
+
+.sort-order{
+  padding: 5px;
+}
+
 .App-header {
   background-color: #222;
   height: 150px;

@@ -25,7 +25,6 @@ class PostList extends Component{
   }
 
   updateSortOrder(e){
-    console.log(e)
     this.setState({ sortOrder: e.trim() })
   }
 
@@ -47,9 +46,11 @@ class PostList extends Component{
     const { categories } = this.props
     const { selectedCategory } = this.state
     const { all } = 'all'
+    const { sortOrder } = this.state
 
     let displayedPosts
     let catLabel
+    let sortLabel
 
     if (selectedCategory !== ''){
       catLabel = selectedCategory
@@ -59,38 +60,64 @@ class PostList extends Component{
       catLabel = 'all'
       displayedPosts = posts
     }
+
+    if (sortOrder === '' || sortOrder === 'author'){
+      console.log("The order is: " + sortOrder)
+      sortLabel = "author"
+    }
+    else if (sortOrder === 'voteScore'){
+      console.log("The order is: " + sortOrder)
+      displayedPosts = displayedPosts.sort((a,b) => (b.voteScore - a.voteScore))
+      sortLabel = "most popular"
+    }
+    else if (sortOrder === 'timestamp'){
+      console.log("The order is: " + sortOrder)
+      displayedPosts = displayedPosts.sort((a,b) => (b.timestamp - a.timestamp))
+      sortLabel = "most recent"
+    }
+    else {
+      console.log("If you are here then, Houston we have a problem.")
+    }
+
     return (
       <div className="post-list-container">
         <div className="toolbar">
           <div className="categories">
-              <button key="all"
+            <div>Filter By:</div>
+            <button key="all"
+              className="btn-categories"
+              onClick={(event) => this.clearFilter()}>All
+            </button>
+            {categories.map((category) => (
+              <button key={category.name}
                 className="btn-categories"
-                onClick={(event) => this.clearFilter()}>All
+                value={category.name}
+                onClick={(event) => this.updateFilter(event.target.value)}>{category.name}
               </button>
-              {categories.map((category) => (
-                <button key={category.name}
-                  className="btn-categories"
-                  value={category.name}
-                  onClick={(event) => this.updateFilter(event.target.value)}>{category.name}
-                </button>
-              ))}
+            ))}
           </div>
           <div className="sort-order">
+            <div>Sort By:</div>
             <button
               className="btn-categories"
               value="author"
-              onClick={(event) => this.updateSortOrder(`author`)}>Author
+              onClick={(event) => this.updateSortOrder(`author`)}>By Author
             </button>
             <button
               className="btn-categories"
               value="timestamp"
-              onClick={(event) => this.updateSortOrder(`timestamp`)}>Date Posted
+              onClick={(event) => this.updateSortOrder(`timestamp`)}>Most Recent
+            </button>
+            <button
+              className="btn-categories"
+              value="votescore"
+              onClick={(event) => this.updateSortOrder(`voteScore`)}>Most Popular
             </button>
           </div>
         </div>
 
         <div className="current-category">
-          <h2 className="section-title">Currently looking at {catLabel} posts:</h2>
+          <h2 className="section-title">Currently looking at {catLabel} posts sorted by {sortLabel}:</h2>
         </div>
         <div className="post-list">
           {displayedPosts.map((post) => (
