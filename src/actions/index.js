@@ -93,6 +93,13 @@ export const voteForPost = (postData) => {
     }
   }
 
+  export const editThisComment = (commentData, cb) => {
+    return (dispatch) => {
+      deleteComment(commentData.id).then(() => cb())
+      dispatch({ type: EDIT_COMMENT, commentData })
+    }
+  }
+
   export const voteForComment = (postData) => {
       return (dispatch) => {
         voteComment(postData)

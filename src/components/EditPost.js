@@ -22,8 +22,8 @@ class EditPost extends Component{
         title: e.target.title.value,
         body: e.target.body.value,
       }
-      this.props.fetchAllPosts()
       this.props.submitEdit(postData, () => this.props.history.push('/'))
+      //this.props.fetchAllPosts()
     }
   }
 
@@ -52,8 +52,8 @@ class EditPost extends Component{
                 <textarea defaultValue={p[0].body} type="text" name="body" className="textArea">
                 </textarea>
               </li>
-              <button>Update</button>
-              <button>Cancel</button>
+              <button className="btn-categories">Update</button>
+              <button className="btn-categories">Cancel</button>
             </ul>
           </form>
         </div>

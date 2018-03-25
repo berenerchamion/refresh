@@ -9,6 +9,7 @@ import PostList from './components/PostList'
 import AddPost from './components/AddPost'
 import DeletePost from './components/DeletePost'
 import EditPost from './components/EditPost'
+import EditComment from './components/EditComment'
 
 class App extends Component{
 
@@ -18,7 +19,6 @@ class App extends Component{
   }
 
   render() {
-    const { posts } = this.props
 
     return (
       <div className="App">
@@ -37,6 +37,7 @@ class App extends Component{
               <Route exact path="/delete/:id" component={DeletePost} />
               <Route exact path="/:category/:id" component={Post} />
               <Route exact path="/:category/:id/edit" component={EditPost} />
+              <Route exact path="/editComment/:id/:parentId/" component={EditComment} />
             </Switch>
           </div>
         </div>

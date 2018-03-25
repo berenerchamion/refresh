@@ -10,13 +10,14 @@ import FaSmileOIcon from 'react-icons/lib/fa/smile-o'
 import FaArrowCircleUp from 'react-icons/lib/fa/arrow-circle-up'
 import FaArrowCircleDown from 'react-icons/lib/fa/arrow-circle-down'
 import FaTimesCircle from 'react-icons/lib/fa/times-circle'
+import FaEdit from 'react-icons/lib/fa/edit'
 import { formatTimestamp } from '../utils/helpers'
 
 class Post extends Component{
 
   state = {
     modalIsOpen: false,
-    postId: null
+    postId: null,
   }
 
   componentWillMount(){
@@ -40,7 +41,6 @@ class Post extends Component{
       voteType: voteType
     }
     this.props.voteForComment(postData)
-    this.props.fetchPostComments(this.props.postId)
   }
 
   submitComment = (e) => {
@@ -92,6 +92,7 @@ class Post extends Component{
     const { posts } = this.props
     const { postId } = this.props
     const { modalIsOpen } = this.state
+    const { commentId } = this.state
 
     //Mapping in values for collections
     let comments = this.props.comments[postId]
@@ -118,7 +119,7 @@ class Post extends Component{
             <ul className="comment-list">
               {comments.map((comment) => (
                 <li key={comment.id} className="comment">Author: {comment.author} Votes: {comment.voteScore}<br/>
-                  {comment.body}<br/>
+                  {comment.body}<Link className="btn-votes" to={`/editComment/${comment.id}/${comment.parentId}`}><FaEdit size={20}/></Link><br/>
                   <button className="btn-votes" onClick={(event => this.submitCommentVote(`${postId}`, `${comment.id}`, 'upVote'))}><FaArrowCircleUp size={20}/></button>
                   <button className="btn-votes" onClick={(event => this.submitCommentVote(`${postId}`, `${comment.id}`, 'downVote'))}><FaArrowCircleDown size={20}/></button>
                   <button className="btn-votes" onClick={(event => this.submitDeleteComment(`${comment.id}`, `${postId}`))}><FaTimesCircle size={20}/></button>
@@ -129,7 +130,7 @@ class Post extends Component{
           </div>
         }
         <div className="add-comment">
-          <button className="add-comment" onClick={this.openModal}>Add Comment</button>
+          <button className="btn-comment-add" onClick={this.openModal}>Add Comment</button>
         </div>
         <div className="comment-modal">
           <Modal
@@ -137,7 +138,7 @@ class Post extends Component{
             overlayClassName="overlay"
             isOpen={modalIsOpen}
             onRequestClose={this.closeModal}
-            contentLabel="Modal"
+            contentLabel="CommentModal"
             >
             <div className="comment-modal">
               <h3 className="comment-modal-header">Add Your Comment:</h3>
@@ -159,13 +160,13 @@ class Post extends Component{
               </div>
               <div className="comment-form-buttons">
                 <button
-                  className="comment-button"
+                  className="btn-comment-add"
                   onClick={this.submitComment}
                   >
                   <FaSmileOIcon size={40}/>
                 </button>
                 <button
-                  className="comment-button"
+                  className="btn-comment-cancel"
                   onClick={this.closeModal}
                   >
                   <FaMehOIcon size={40}/>
@@ -174,7 +175,6 @@ class Post extends Component{
           </div>
           </Modal>
         </div>
-
       </div>
     )
   }

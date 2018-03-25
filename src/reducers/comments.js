@@ -7,7 +7,7 @@ import {
         } from '../actions'
 
 function comments(state={}, action) {
-  const { comment, commentData, postData, comments } = action
+  const { commentData, postData, comments } = action
   switch(action.type) {
     case FETCH_COMMENTS:
       return{
@@ -20,7 +20,16 @@ function comments(state={}, action) {
         [commentData.parentId]: state[commentData.parentId].concat([commentData])
       }
     case EDIT_COMMENT:
-      return state
+      return {
+        ...state,
+        [commentData.parentID]: state[commentData.parentId].map(comment => {
+          if (comment.id === commentData.id){
+            comment.author = commentData.Author
+            comment.body = commentData.body
+          }
+          return comment
+        })
+      }
     case DELETE_COMMENT:
       return {
         ...state,
@@ -43,7 +52,7 @@ function comments(state={}, action) {
               comment.voteScore -= 1
             }
           }
-          return state
+          return comment
         })
       }
     default:

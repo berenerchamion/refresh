@@ -62,7 +62,6 @@ class PostList extends Component{
     }
 
     if (sortOrder === '' || sortOrder === 'author'){
-      console.log("The order is: " + sortOrder)
       displayedPosts = displayedPosts.sort((a,b) => {
         const aAuthor = a.author.toLowerCase(), bAuthor=b.author.toLowerCase()
         if (aAuthor < bAuthor)
@@ -74,17 +73,15 @@ class PostList extends Component{
       sortLabel = "author"
     }
     else if (sortOrder === 'voteScore'){
-      console.log("The order is: " + sortOrder)
       displayedPosts = displayedPosts.sort((a,b) => (b.voteScore - a.voteScore))
       sortLabel = "most popular"
     }
     else if (sortOrder === 'timestamp'){
-      console.log("The order is: " + sortOrder)
       displayedPosts = displayedPosts.sort((a,b) => (b.timestamp - a.timestamp))
       sortLabel = "most recent"
     }
     else {
-      console.log("If you are here then, Houston we have a problem.")
+      sortLabel = "author"
     }
 
     return (
