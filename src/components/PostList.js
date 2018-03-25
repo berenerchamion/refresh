@@ -12,7 +12,8 @@ import FaEdit from 'react-icons/lib/fa/edit'
 class PostList extends Component{
 
   state = {
-    selectedCategory: ''
+    selectedCategory: '',
+    sortOrder: ''
   }
 
   updateFilter = (e) => {
@@ -21,6 +22,15 @@ class PostList extends Component{
 
   clearFilter = () => {
     this.setState({selectedCategory: ''})
+  }
+
+  updateSortOrder(e){
+    console.log(e)
+    this.setState({ sortOrder: e.trim() })
+  }
+
+  clearSortOrder = () => {
+    this.setState({sortOrder: ''})
   }
 
   submitPostVote = (id, voteType) => {
@@ -36,6 +46,7 @@ class PostList extends Component{
     const { posts } = this.props
     const { categories } = this.props
     const { selectedCategory } = this.state
+    const { all } = 'all'
 
     let displayedPosts
     let catLabel
@@ -50,15 +61,34 @@ class PostList extends Component{
     }
     return (
       <div className="post-list-container">
-        <div className="categories">
-          <ul className="category-list">
-            <button key="all" className="btn-categories" value="all" onClick={(event) => this.clearFilter()}>All</button>
-            {categories.map((category) => (
-              <button key={category.name} className="btn-categories" value={category.name}
-                onClick={(event) => this.updateFilter(event.target.value)}>{category.name}</button>
-            ))}
-          </ul>
+        <div className="toolbar">
+          <div className="categories">
+              <button key="all"
+                className="btn-categories"
+                onClick={(event) => this.clearFilter()}>All
+              </button>
+              {categories.map((category) => (
+                <button key={category.name}
+                  className="btn-categories"
+                  value={category.name}
+                  onClick={(event) => this.updateFilter(event.target.value)}>{category.name}
+                </button>
+              ))}
+          </div>
+          <div className="sort-order">
+            <button
+              className="btn-categories"
+              value="author"
+              onClick={(event) => this.updateSortOrder(`author`)}>Author
+            </button>
+            <button
+              className="btn-categories"
+              value="timestamp"
+              onClick={(event) => this.updateSortOrder(`timestamp`)}>Date Posted
+            </button>
+          </div>
         </div>
+
         <div className="current-category">
           <h2 className="section-title">Currently looking at {catLabel} posts:</h2>
         </div>
