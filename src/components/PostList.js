@@ -63,6 +63,14 @@ class PostList extends Component{
 
     if (sortOrder === '' || sortOrder === 'author'){
       console.log("The order is: " + sortOrder)
+      displayedPosts = displayedPosts.sort((a,b) => {
+        const aAuthor = a.author.toLowerCase(), bAuthor=b.author.toLowerCase()
+        if (aAuthor < bAuthor)
+         return -1
+        if (aAuthor> bAuthor)
+          return 1
+        return 0
+      })
       sortLabel = "author"
     }
     else if (sortOrder === 'voteScore'){
