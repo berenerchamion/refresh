@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import * as actions from '../actions'
 import EditPost from './EditPost'
 import { formatTimestamp } from '../utils/helpers'
+import FaArrowCircleUp from 'react-icons/lib/fa/arrow-circle-up'
+import FaArrowCircleDown from 'react-icons/lib/fa/arrow-circle-down'
+import FaEdit from 'react-icons/lib/fa/edit'
 
 class PostList extends Component{
 
@@ -49,9 +52,9 @@ class PostList extends Component{
       <div className="post-list-container">
         <div className="categories">
           <ul className="category-list">
-            <button key="all" value="all" onClick={(event) => this.clearFilter()}>All</button>
+            <button key="all" className="btn-categories" value="all" onClick={(event) => this.clearFilter()}>All</button>
             {categories.map((category) => (
-              <button key={category.name} value={category.name}
+              <button key={category.name} className="btn-categories" value={category.name}
                 onClick={(event) => this.updateFilter(event.target.value)}>{category.name}</button>
             ))}
           </ul>
@@ -61,15 +64,17 @@ class PostList extends Component{
         </div>
         <div className="post-list">
           {displayedPosts.map((post) => (
-            <li className="post-details" key={post.id} >
-              <Link to={`/${post.category}/${post.id}`}>
-                { post.title }</Link> by { post.author } at {formatTimestamp(`${post.timestamp}`)} <Link to={`/${post.category}/${post.id}/edit`}>Edit Post</Link>
-                <br/>
-              Category: { post.category }<br/>
-              Popularity: { post.voteScore }
-            <button className="vote-button" onClick={(event => this.submitPostVote(`${post.id}`, 'upVote'))}>+</button>
-            <button onClick={(event => this.submitPostVote(`${post.id}`, 'downVote'))}>-</button><br/>
-            Comment Count: gotta add this...<br/></li>
+            <div className="post-details" key={post.id}>
+              <div className="post-title">
+                <Link to={`/${post.category}/${post.id}`}>
+                  { post.title }</Link> by { post.author } on {formatTimestamp(`${post.timestamp}`)}
+                    <Link className="btn-votes" to={`/${post.category}/${post.id}/edit`}><FaEdit size={20}/></Link>
+              </div>
+              <div className="post-category">Category: { post.category }</div>
+              <div className="post-popularity]">Popularity: { post.voteScore }</div>
+            <button className="btn-votes" onClick={(event => this.submitPostVote(`${post.id}`, 'upVote'))}><FaArrowCircleUp size={20}/></button>
+            <button className="btn-votes" onClick={(event => this.submitPostVote(`${post.id}`, 'downVote'))}><FaArrowCircleDown size={20}/></button><br/>
+            </div>
           ))}
         </div>
       </div>

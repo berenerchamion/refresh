@@ -7,6 +7,9 @@ import Modal from 'react-modal'
 import { uuidv4} from '../utils/helpers'
 import FaMehOIcon from 'react-icons/lib/fa/meh-o'
 import FaSmileOIcon from 'react-icons/lib/fa/smile-o'
+import FaArrowCircleUp from 'react-icons/lib/fa/arrow-circle-up'
+import FaArrowCircleDown from 'react-icons/lib/fa/arrow-circle-down'
+import FaTimesCircle from 'react-icons/lib/fa/times-circle'
 import { formatTimestamp } from '../utils/helpers'
 
 class Post extends Component{
@@ -101,12 +104,12 @@ class Post extends Component{
             <div className="post-title">{p.title} - by - {p.author} - on {formatTimestamp(`${p.timestamp}`)}</div>
             <div className="post-body">{ p.body }</div>
             <div className="post-votes">
-                <div className="vote-buttons">Votes: { p.voteScore }
-                  <button className="vote-button" onClick={(event => this.submitPostVote(`${p.id}`, 'upVote'))}>+</button>
-                  <button className="vote-button" onClick={(event => this.submitPostVote(`${p.id}`, 'downVote'))}>-</button>
+                <div className="vote">Votes: { p.voteScore }
+                  <button className="btn-votes" onClick={(event => this.submitPostVote(`${p.id}`, 'upVote'))}><FaArrowCircleUp size={20}/></button>
+                  <button className="btn-votes" onClick={(event => this.submitPostVote(`${p.id}`, 'downVote'))}><FaArrowCircleDown size={20}/></button>
+                  <Link className="btn-delete-post" to={`/delete/${p.id}`}><FaTimesCircle size={20}/></Link>
                 </div>
             </div>
-            <div className="post-delete"><Link className="delete-post" to={`/delete/${p.id}`}>Delete Me!</Link></div>
           </div>
         ))}
         {comments &&
@@ -114,12 +117,13 @@ class Post extends Component{
             <h2 className="section-title">Comments:</h2>
             <ul className="comment-list">
               {comments.map((comment) => (
-                <li key={comment.id} className="comment">{comment.author} Votes: {comment.voteScore}
-                  <button className="vote-up-button" onClick={(event => this.submitCommentVote(`${postId}`, `${comment.id}`, 'upVote'))}>+</button>
-                  <button className="vote-down-button" onClick={(event => this.submitCommentVote(`${postId}`, `${comment.id}`, 'downVote'))}>-</button>
-                  <button className="delete-comment" onClick={(event => this.submitDeleteComment(`${comment.id}`, `${postId}`))}>X</button>
+                <li key={comment.id} className="comment">Author: {comment.author} Votes: {comment.voteScore}<br/>
+                  {comment.body}<br/>
+                  <button className="btn-votes" onClick={(event => this.submitCommentVote(`${postId}`, `${comment.id}`, 'upVote'))}><FaArrowCircleUp size={20}/></button>
+                  <button className="btn-votes" onClick={(event => this.submitCommentVote(`${postId}`, `${comment.id}`, 'downVote'))}><FaArrowCircleDown size={20}/></button>
+                  <button className="btn-votes" onClick={(event => this.submitDeleteComment(`${comment.id}`, `${postId}`))}><FaTimesCircle size={20}/></button>
                   <br/>
-                {comment.body} </li>
+                </li>
               ))}
             </ul>
           </div>
