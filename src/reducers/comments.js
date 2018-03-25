@@ -22,7 +22,7 @@ function comments(state={}, action) {
     case EDIT_COMMENT:
       return {
         ...state,
-        [commentData.parentID]: state[commentData.parentId].map(comment => {
+        [commentData.parentId]: state[commentData.parentId].map(comment => {
           if (comment.id === commentData.id){
             comment.author = commentData.Author
             comment.body = commentData.body

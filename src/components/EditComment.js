@@ -21,8 +21,10 @@ class EditComment extends Component{
       alert("Hey, you need a title and author")
     }
     else {
+      console.log(this.props.commentId + " " + e.target.author.value + " " + e.target.body.value)
       const commentData = {
         id: this.props.commentId,
+        parentId: this.props.parentId,
         title: e.target.author.value,
         body: e.target.body.value,
       }
@@ -40,9 +42,9 @@ class EditComment extends Component{
     console.log("do I have crap??")
     console.log(this.props.comments)
 
-    let comment = this.props.comments.filter((comment) => (comment.parentId === parentId))
+    let comment = this.props.comments[parentId].filter((comment) => (comment.id === commentId))
 
-
+    console.log(comment[0].id)
 
     return (
         <div className="editCommentForm">
@@ -51,11 +53,11 @@ class EditComment extends Component{
           <ul className="form-style-1">
             <li>
               <label>Author</label>
-              <input defaultValue="huh" type="text" name="author" className="field-long" />
+              <input defaultValue={comment[0].author}  type="text" name="author" className="field-long" />
             </li>
             <li>
               <label>Comment:</label>
-              <textarea defaultValue="huh" type="text" name="body" className="textArea">
+              <textarea defaultValue={comment[0].body} type="text" name="body" className="textArea">
               </textarea>
             </li>
             <button className="btn-categories">Update</button>

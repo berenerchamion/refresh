@@ -71,10 +71,10 @@ if (!token)
   }
 
   export const editComment = (commentData) => {
-    return fetch (`${api}/posts/${commentData.id}`, {
+    return fetch (`${api}/comments/${commentData.id}`, {
       method: 'PUT',
       headers: headers,
-      body: JSON.stringify({title: commentData.title, body: commentData.body})
+      body: JSON.stringify({author: commentData.author, body: commentData.body})
     })
   }
 
