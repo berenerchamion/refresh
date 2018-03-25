@@ -21,11 +21,9 @@ class EditComment extends Component{
       alert("Hey, you need a title and author")
     }
     else {
-      console.log(this.props.commentId + " " + e.target.author.value + " " + e.target.body.value)
       const commentData = {
         id: this.props.commentId,
         parentId: this.props.parentId,
-        title: e.target.author.value,
         body: e.target.body.value,
       }
       this.props.editThisComment(commentData, () => this.props.history.push('/'))
@@ -36,16 +34,7 @@ class EditComment extends Component{
     const { commentId } = this.props
     const { parentId } = this.props
     const { comments } = this.props
-
-    console.log("commentId" + commentId)
-    console.log ("parentId" + parentId)
-    console.log("do I have crap??")
-    console.log(this.props.comments)
-
     let comment = this.props.comments[parentId].filter((comment) => (comment.id === commentId))
-
-    console.log(comment[0].id)
-
     return (
         <div className="editCommentForm">
         <form onSubmit={this.editComment}>

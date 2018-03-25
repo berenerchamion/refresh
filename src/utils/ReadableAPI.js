@@ -74,7 +74,7 @@ if (!token)
     return fetch (`${api}/comments/${commentData.id}`, {
       method: 'PUT',
       headers: headers,
-      body: JSON.stringify({author: commentData.author, body: commentData.body})
+      body: JSON.stringify({body: commentData.body})
     })
   }
 
