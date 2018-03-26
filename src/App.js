@@ -34,14 +34,15 @@ class App extends Component{
                     <h1 className="App-title">Welcome to Readable - a Nanodegree Project!</h1>
                   </Link>
                   <div className="btn-add-post">
-                    <Link className="add-post" to={`/add`}>Create Post</Link>
+                    <Link className="add-post" to={`/post/add`}>Create Post</Link>
                   </div>
                 </div>
             </header>
           <div className="content">
             <Switch>
               <Route exact path="/" component={PostList} />
-              <Route exact path="/add" component={AddPost} />
+              <Route exact path="/:category" component={PostList}/>
+              <Route exact path="/post/add" component={AddPost} />
               <Route exact path="/delete/:id" component={DeletePost} />
               <Route exact path="/:category/:id" component={Post} />
               <Route exact path="/:category/:id/edit" component={EditPost} />

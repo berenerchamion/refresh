@@ -13,6 +13,12 @@ class PostList extends Component{
     sortOrder: ''
   }
 
+  componentDidMount(){
+    if (this.props.categoryUrl && this.props.categoryUrl !== this.state.selectedCategory){
+      this.setState({ selectedCategory: this.props.categoryUrl.trim() })
+    }
+  }
+
   updateFilter = (e) => {
     this.setState({ selectedCategory: e.trim() })
   }
@@ -139,10 +145,11 @@ class PostList extends Component{
   }
 }
 
-function mapStateToProps({ posts, categories }) {
+function mapStateToProps({ posts, categories }, { match }) {
   return {
     posts: posts,
-    categories: categories
+    categories: categories,
+    categoryUrl: match.params.category
   }
 }
 

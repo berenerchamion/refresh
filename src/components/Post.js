@@ -117,7 +117,7 @@ class Post extends Component{
         ))}
         {comments &&
           <div className="post-comments">
-            <h2 className="section-title">Comments:</h2>
+            <h2 className="section-title">Comments: {comments.length}</h2>
             <ul className="comment-list">
               {comments.map((comment) => (
                 <li key={comment.id} className="comment">Author: {comment.author} Votes: {comment.voteScore}<br/>
