@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import * as actions from '../actions'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
 import { uuidv4} from '../utils/helpers'
 import FaMehOIcon from 'react-icons/lib/fa/meh-o'
@@ -12,7 +11,6 @@ import FaArrowCircleDown from 'react-icons/lib/fa/arrow-circle-down'
 import FaTimesCircle from 'react-icons/lib/fa/times-circle'
 import FaEdit from 'react-icons/lib/fa/edit'
 import { formatTimestamp } from '../utils/helpers'
-import EditPost from './EditPost'
 
 class Post extends Component{
 
@@ -93,7 +91,6 @@ class Post extends Component{
     const { posts } = this.props
     const { postId } = this.props
     const { modalIsOpen } = this.state
-    const { commentId } = this.state
 
     //Mapping in values for collections
     let comments = this.props.comments[postId]

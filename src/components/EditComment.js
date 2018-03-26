@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 import { Redirect } from 'react-router-dom'
@@ -34,7 +33,20 @@ class EditComment extends Component{
     const { commentId } = this.props
     const { parentId } = this.props
     const { comments } = this.props
-    let comment = this.props.comments[parentId].filter((comment) => (comment.id === commentId))
+    const { posts } = this.props
+
+    let p = posts.filter((post) => (post.id === parentId))
+    let postCategory = p[0].category
+
+    if (!comments){
+      let url = '/' + postCategory + '/' + parentId
+      return (
+        <Redirect to={{ pathname: url}}/>
+      )
+    }
+
+    let comment = comments[parentId].filter((comment) => (comment.id === commentId))
+
     return (
         <div className="editCommentForm">
         <form onSubmit={this.editComment}>
@@ -59,8 +71,8 @@ class EditComment extends Component{
 }
 
 function mapStateToProps(state, { match }) {
-  console.log(state.comments)
   return {
+    posts: state.posts,
     commentId: match.params.id,
     parentId: match.params.parentId,
     comments: state.comments,

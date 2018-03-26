@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter, Link} from 'react-router-dom'
-import PropTypes from 'prop-types';
 import * as actions from '../actions'
 import { formatTimestamp } from '../utils/helpers'
 import FaArrowCircleUp from 'react-icons/lib/fa/arrow-circle-up'
 import FaArrowCircleDown from 'react-icons/lib/fa/arrow-circle-down'
-import FaEdit from 'react-icons/lib/fa/edit'
 
 class PostList extends Component{
 
@@ -44,7 +42,6 @@ class PostList extends Component{
     const { posts } = this.props
     const { categories } = this.props
     const { selectedCategory } = this.state
-    const { all } = 'all'
     const { sortOrder } = this.state
 
     let displayedPosts
@@ -53,9 +50,9 @@ class PostList extends Component{
 
     if (selectedCategory !== ''){
       catLabel = selectedCategory
-      displayedPosts = posts.filter((post) => (post.category === selectedCategory && post.deleted != true))
+      displayedPosts = posts.filter((post) => (post.category === selectedCategory && post.deleted !== true))
     }
-    else{
+    else {
       catLabel = 'all'
       displayedPosts = posts
     }
