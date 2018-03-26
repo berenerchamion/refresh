@@ -22,3 +22,4 @@ yarn-error.log*
 .sonar_lock
 class-mapping.csv
 report-task.txt
+sonar-project.properties
