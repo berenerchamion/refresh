@@ -22,8 +22,8 @@ class EditPost extends Component{
         title: e.target.title.value,
         body: e.target.body.value,
       }
-      this.props.submitEdit(postData, () => this.props.history.push('/'))
-      //this.props.fetchAllPosts()
+      let url = '/'+this.props.category+'/'+this.props.postId
+      this.props.submitEdit(postData, () => this.props.history.push(url))
     }
   }
 
@@ -32,9 +32,10 @@ class EditPost extends Component{
     const { postId } = this.props
     let p = posts.filter((post) => (post.id === postId))
 
-    if (!p[0].id){
+    if (!p[0] || !p[0].id){
+      let url = '/'+this.props.category+'/'+this.props.postId
       return (
-        <Redirect to={{ pathname: '/'}}/>
+        <Redirect to={{ pathname: url}}/>
       )
     }
 
@@ -65,6 +66,7 @@ function mapStateToProps(state, { match }) {
   return {
     posts: state.posts,
     postId: match.params.id,
+    category: match.params.category,
   }
 }
 

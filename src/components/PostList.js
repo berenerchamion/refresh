@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { withRouter, Link} from 'react-router-dom'
 import PropTypes from 'prop-types';
 import * as actions from '../actions'
-import EditPost from './EditPost'
 import { formatTimestamp } from '../utils/helpers'
 import FaArrowCircleUp from 'react-icons/lib/fa/arrow-circle-up'
 import FaArrowCircleDown from 'react-icons/lib/fa/arrow-circle-down'
@@ -130,7 +129,6 @@ class PostList extends Component{
               <div className="post-title">
                 <Link to={`/${post.category}/${post.id}`}>
                   { post.title }</Link> by { post.author } on {formatTimestamp(`${post.timestamp}`)}
-                    <Link className="btn-votes" to={`/${post.category}/${post.id}/edit`}><FaEdit size={20}/></Link>
               </div>
               <div className="post-category">Category: { post.category }</div>
               <div className="post-popularity]">Popularity: { post.voteScore }</div>

@@ -38,8 +38,9 @@ export const fetchOnePost = (id) => {
 
 export const voteForPost = (postData) => {
     return (dispatch) => {
-      votePost(postData)
-      dispatch({type: VOTE_FOR_POST, postData })
+      votePost(postData).then(updatedPost => {
+        return dispatch({type: VOTE_FOR_POST, postData })
+      })
     }
   }
 
@@ -102,8 +103,9 @@ export const voteForPost = (postData) => {
 
   export const voteForComment = (postData) => {
       return (dispatch) => {
-        voteComment(postData)
-        dispatch({type: VOTE_FOR_COMMENT, postData })
+        voteComment(postData).then(updatedComment => {
+          dispatch({type: VOTE_FOR_COMMENT, postData })
+        })
       }
   }
 

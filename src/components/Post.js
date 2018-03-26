@@ -12,6 +12,7 @@ import FaArrowCircleDown from 'react-icons/lib/fa/arrow-circle-down'
 import FaTimesCircle from 'react-icons/lib/fa/times-circle'
 import FaEdit from 'react-icons/lib/fa/edit'
 import { formatTimestamp } from '../utils/helpers'
+import EditPost from './EditPost'
 
 class Post extends Component{
 
@@ -102,10 +103,14 @@ class Post extends Component{
       <div className="post-container">
         {post.map((p) => (
           <div key={p.id} className="post-details">
-            <div className="post-title">{p.title} - by - {p.author} - on {formatTimestamp(`${p.timestamp}`)}</div>
+            <div className="post-title">{p.title} - by - {p.author} - on {formatTimestamp(`${p.timestamp}`)}
+              <Link className="btn-votes" to={`/${p.category}/${p.id}/edit`}>
+                <FaEdit size={20}/>
+              </Link>
+            </div>
             <div className="post-body">{ p.body }</div>
-            <div className="post-votes">
-                <div className="vote">Votes: { p.voteScore }
+            <div className="post-votes">Votes: { p.voteScore }
+                <div className="vote-buttons">
                   <button className="btn-votes" onClick={(event => this.submitPostVote(`${p.id}`, 'upVote'))}><FaArrowCircleUp size={20}/></button>
                   <button className="btn-votes" onClick={(event => this.submitPostVote(`${p.id}`, 'downVote'))}><FaArrowCircleDown size={20}/></button>
                   <Link className="btn-delete-post" to={`/delete/${p.id}`}><FaTimesCircle size={20}/></Link>
@@ -185,7 +190,7 @@ function mapStateToProps(state, { match }) {
     posts: state.posts,
     postId: match.params.id,
     category: match.params.id,
-    comments: state.comments
+    comments: state.comments,
   }
 }
 

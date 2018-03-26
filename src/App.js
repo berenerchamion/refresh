@@ -24,11 +24,19 @@ class App extends Component{
       <div className="App">
         <div className="container">
             <header className="App-header">
-              <Link className="link-home" to={`/`}>
-                <img src={logo} className="App-logo" alt="logo" />
-                <h1 className="App-title">Welcome to Readable - a Nanodegree Project!</h1>
-              </Link>
-              <div className="add-post"><Link className="add-post" to={`/add`}>Got soomething to say???</Link></div>
+              <div className="logo">
+                <Link className="link-home" to={`/`}>
+                  <img src={logo} className="App-logo" alt="logo" />
+                </Link>
+              </div>
+                <div className="masthead">
+                  <Link className="link-home" to={`/`}>
+                    <h1 className="App-title">Welcome to Readable - a Nanodegree Project!</h1>
+                  </Link>
+                  <div className="btn-add-post">
+                    <Link className="add-post" to={`/add`}>Create Post</Link>
+                  </div>
+                </div>
             </header>
           <div className="content">
             <Switch>

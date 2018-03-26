@@ -19,7 +19,8 @@ function posts(state=[], action) {
     case EDIT_POST:
       return state.map(post => {
         if (post.id === postData.id){
-          post = postData
+          post.title = postData.title
+          post.body = postData.body
         }
         return post
       })

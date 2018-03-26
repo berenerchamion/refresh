@@ -23,20 +23,17 @@ class AddPost extends Component{
     const { categories } = this.props
     return(
       <div className="container">
-        <div className="categories">
-          Hey there - add something...
-        </div>
         <div className="add-post-form">
           <form onSubmit={this.submitPost}>
             <h2>Create a Post:</h2>
-            <ul className="form">
+            <ul className="form-style-1">
               <li>
                 <label>Author: </label>
-                <input type="text" name="author" className="textField" />
+                <input type="text" name="author" className="field-long" />
               </li>
               <li>
                 <label>Title: </label>
-                <input type="text" name="title" className="textField" />
+                <input type="text" name="title" className="field-long" />
               </li>
               <li>
                 <label>Category: </label>
@@ -51,7 +48,7 @@ class AddPost extends Component{
                 <textarea type="text" name="body" className="textArea" />
               </li>
             </ul>
-            <button>Submit Post</button>
+            <button className="btn-categories">Submit Post</button>
           </form>
         </div>
       </div>
