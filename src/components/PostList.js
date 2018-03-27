@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { withRouter, Link} from 'react-router-dom'
+import { withRouter, Link, Redirect} from 'react-router-dom'
 import * as actions from '../actions'
 import { formatTimestamp } from '../utils/helpers'
 import FaArrowCircleUp from 'react-icons/lib/fa/arrow-circle-up'
@@ -9,22 +9,9 @@ import FaArrowCircleDown from 'react-icons/lib/fa/arrow-circle-down'
 class PostList extends Component{
 
   state = {
-    selectedCategory: '',
-    sortOrder: ''
+    sortOrder: '',
   }
-
   componentDidMount(){
-    if (this.props.categoryUrl && this.props.categoryUrl !== this.state.selectedCategory){
-      this.setState({ selectedCategory: this.props.categoryUrl.trim() })
-    }
-  }
-
-  updateFilter = (e) => {
-    this.setState({ selectedCategory: e.trim() })
-  }
-
-  clearFilter = () => {
-    this.setState({selectedCategory: ''})
   }
 
   updateSortOrder(e){
@@ -47,16 +34,16 @@ class PostList extends Component{
   render() {
     const { posts } = this.props
     const { categories } = this.props
-    const { selectedCategory } = this.state
+    const { categoryUrl } = this.props
     const { sortOrder } = this.state
 
     let displayedPosts
     let catLabel
     let sortLabel
 
-    if (selectedCategory !== ''){
-      catLabel = selectedCategory
-      displayedPosts = posts.filter((post) => (post.category === selectedCategory && post.deleted !== true))
+    if (categoryUrl && categoryUrl !== ''){
+      catLabel = categoryUrl
+      displayedPosts = posts.filter((post) => (post.category === categoryUrl && post.deleted !== true))
     }
     else {
       catLabel = 'all'
@@ -91,16 +78,18 @@ class PostList extends Component{
         <div className="toolbar">
           <div className="categories">
             <div>Filter By:</div>
+            <Link to={`/`}>
             <button key="all"
-              className="btn-categories"
-              onClick={(event) => this.clearFilter()}>All
+              className="btn-categories">All
             </button>
+          </Link>
             {categories.map((category) => (
-              <button key={category.name}
-                className="btn-categories"
-                value={category.name}
-                onClick={(event) => this.updateFilter(event.target.value)}>{category.name}
-              </button>
+              <Link key={category.name} to={`/${category.name}`}>
+                <button
+                  className="btn-categories"
+                  value={category.name}>{category.name}
+                </button>
+              </Link>
             ))}
           </div>
           <div className="sort-order">
