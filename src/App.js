@@ -10,6 +10,7 @@ import AddPost from './components/AddPost'
 import DeletePost from './components/DeletePost'
 import EditPost from './components/EditPost'
 import EditComment from './components/EditComment'
+import ErrorPage from './components/ErrorPage'
 
 class App extends Component{
 
@@ -41,6 +42,7 @@ class App extends Component{
           <div className="content">
             <Switch>
               <Route exact path="/" component={PostList} />
+              <Route exact path="/error" component={ErrorPage} />
               <Route exact path="/:category" component={PostList}/>
               <Route exact path="/post/add" component={AddPost} />
               <Route exact path="/delete/:id" component={DeletePost} />

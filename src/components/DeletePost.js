@@ -15,8 +15,8 @@ class DeletePost extends Component{
     const { postId } = this.props
     return(
       <div className="container">
-      <div className="confirm">Are you sure???</div>
-      <div className="button"><button value="Delete Post" onClick={(event => this.deletePost(`${postId}`))}>Delete Post</button></div>
+      <div className="confirm"><h2>Are you sure???</h2></div>
+      <div className="button"><button className="btn-categories" value="Delete Post" onClick={(event => this.deletePost(`${postId}`))}>Delete Post</button></div>
       </div>
     )
   }

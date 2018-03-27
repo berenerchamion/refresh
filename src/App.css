@@ -7,6 +7,15 @@
   list-style-type: none;
 }
 
+.comment-list{
+  list-style-type: none;
+}
+
+.comment {
+  list-style-type: none;
+  padding-bottom: 10px;
+}
+
 .App-logo {
   height: 80px;
   float: left;
@@ -46,6 +55,14 @@ a{
 }
 
 .post-votes{
+  padding: 5px;
+}
+
+.post-body{
+  padding: 5px;
+}
+
+.post-comments{
   padding: 5px;
 }
 
@@ -198,7 +215,6 @@ a{
 
 .form-style-1 {
     margin:10px auto;
-    max-width: 400px;
     padding: 20px 12px 10px 20px;
     font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
