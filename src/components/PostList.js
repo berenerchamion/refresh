@@ -5,6 +5,7 @@ import * as actions from '../actions'
 import { formatTimestamp } from '../utils/helpers'
 import FaArrowCircleUp from 'react-icons/lib/fa/arrow-circle-up'
 import FaArrowCircleDown from 'react-icons/lib/fa/arrow-circle-down'
+import FaEdit from 'react-icons/lib/fa/edit'
 
 class PostList extends Component{
 
@@ -121,6 +122,9 @@ class PostList extends Component{
               <div className="post-title">
                 <Link to={`/${post.category}/${post.id}`}>
                   { post.title }</Link> by { post.author } on {formatTimestamp(`${post.timestamp}`)}
+                  <Link className="btn-votes" to={`/${post.category}/${post.id}/edit`}>
+                    <FaEdit size={20}/>
+                  </Link>
               </div>
               <div className="post-category">Category: { post.category }</div>
               <div className="post-comment-count">Comments: { post.commentCount }</div>
