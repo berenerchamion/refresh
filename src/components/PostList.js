@@ -123,6 +123,7 @@ class PostList extends Component{
                   { post.title }</Link> by { post.author } on {formatTimestamp(`${post.timestamp}`)}
               </div>
               <div className="post-category">Category: { post.category }</div>
+              <div className="post-comment-count">Comments: { post.commentCount }</div>
               <div className="post-popularity]">Popularity: { post.voteScore }</div>
             <button className="btn-votes" onClick={(event => this.submitPostVote(`${post.id}`, 'upVote'))}><FaArrowCircleUp size={20}/></button>
             <button className="btn-votes" onClick={(event => this.submitPostVote(`${post.id}`, 'downVote'))}><FaArrowCircleDown size={20}/></button><br/>
