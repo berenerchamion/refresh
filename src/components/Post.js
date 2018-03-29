@@ -42,7 +42,7 @@ class Post extends Component{
     this.props.voteForComment(postData)
   }
 
-  submitComment = (e) => {
+  submitComment = e => {
     e.preventDefault()
     if (!this.input.value || !this.author.value){
       alert("Author and a comment are required")

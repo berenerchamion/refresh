@@ -13,7 +13,7 @@ class EditComment extends Component{
     this.props.fetchPostComments(this.props.parentId)
   }
 
-  editComment = (e) => {
+  editComment = e => {
     e.preventDefault()
     if (e.target.body.value === "" || e.target.author.value === ""){
       //Replace with a modal box

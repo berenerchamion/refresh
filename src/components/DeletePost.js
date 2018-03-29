@@ -4,7 +4,7 @@ import * as actions from '../actions'
 
 class DeletePost extends Component{
 
-  deletePost = (postId) => {
+  deletePost = postId => {
     const postData = {
       id: postId
     }

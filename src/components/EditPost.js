@@ -9,7 +9,7 @@ class EditPost extends Component{
     postId: ''
   }
 
-  editPost = (e) => {
+  editPost = e => {
     e.preventDefault()
     if (e.target.body.value === "" || e.target.title.value === ""){
       //Replace with a modal box

@@ -5,7 +5,7 @@ import { uuidv4 } from '../utils/helpers'
 
 class AddPost extends Component{
 
-  submitPost = (e) => {
+  submitPost = e => {
     e.preventDefault()
     const postData = {
       id: uuidv4(),
